@@ -1,0 +1,475 @@
+[
+  {
+    "main_category": "All Beauty",
+    "title": "CeraVe Hydrating Facial Cleanser for Normal to Dry Skin",
+    "average_rating": 4.7,
+    "rating_number": 1420,
+    "features": [
+      "Contains Essential Ceramides (1, 3, 6-II)",
+      "Formulated with Hyaluronic Acid for moisture retention",
+      "Fragrance-free, non-comedogenic and non-irritating",
+      "Dermatologist Recommended for dry and normal skin"
+    ],
+    "description": [
+      "CeraVe Hydrating Facial Cleanser is a gentle face wash with ingredients like ceramides and hyaluronic acid that work to restore the skin's natural barrier to help skin lock in moisture."
+    ],
+    "price": 550.0,
+    "store": "CeraVe",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Facial Cleansers"
+    ],
+    "details": {
+      "Item Form": "Liquid Wash",
+      "Skin Type": "Dry, Normal",
+      "Scent": "Unscented",
+      "Volume": "16 fl oz"
+    },
+    "parent_asin": "B000143526",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B000143526.jpg",
+        "local_url": "/static/images/products/B000143526.jpg",
+        "thumb": "/static/images/products/B000143526.jpg",
+        "large": "/static/images/products/B000143526.jpg",
+        "fallback_svg": "/static/images/products/B000143526.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B000143526.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "The Ordinary Niacinamide 10% + Zinc 1% High-Strength Vitamin Serum",
+    "average_rating": 4.5,
+    "rating_number": 3280,
+    "features": [
+      "10% Pure Niacinamide (Vitamin B3) formula",
+      "1% Zinc PCA to balance sebum activity",
+      "Targets blemishes, enlarged pores, and skin texture",
+      "Vegan, cruelty-free, silicone-free"
+    ],
+    "description": [
+      "Niacinamide (Vitamin B3) is indicated to reduce the appearance of skin blemishes and congestion. A high 10% concentration of this vitamin is supported in the formula by zinc salt of pyrrolidone carboxylic acid."
+    ],
+    "price": 600.0,
+    "store": "The Ordinary",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Facial Serums"
+    ],
+    "details": {
+      "Item Form": "Serum",
+      "Skin Type": "Oily, Combination",
+      "Volume": "30ml",
+      "Key Ingredient": "Niacinamide"
+    },
+    "parent_asin": "B0009V1YR8",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B0009V1YR8.jpg",
+        "local_url": "/static/images/products/B0009V1YR8.jpg",
+        "thumb": "/static/images/products/B0009V1YR8.jpg",
+        "large": "/static/images/products/B0009V1YR8.jpg",
+        "fallback_svg": "/static/images/products/B0009V1YR8.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B0009V1YR8.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Maybelline Lash Sensational Washable Mascara - Very Black",
+    "average_rating": 4.4,
+    "rating_number": 2150,
+    "features": [
+      "Exclusive fanning brush with ten layers of bristles",
+      "Reveals layers of lashes for a full-fan effect",
+      "Infused with Rosehip Oil to nourish lashes",
+      "Ophthalmologist tested and suitable for contact lens wearers"
+    ],
+    "description": [
+      "Maybelline Lash Sensational Mascara captures lashes from root to tip with a sensational full-fan lash effect. Liquid ink formula with lowest wax count creates dark, defined lashes."
+    ],
+    "price": 549.0,
+    "store": "Maybelline",
+    "categories": [
+      "Beauty & Personal Care",
+      "Makeup",
+      "Eyes",
+      "Mascara"
+    ],
+    "details": {
+      "Color": "Very Black",
+      "Finish": "Volumizing",
+      "Water Resistance": "Washable"
+    },
+    "parent_asin": "B001MA0QY2",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B001MA0QY2.jpg",
+        "local_url": "/static/images/products/B001MA0QY2.jpg",
+        "thumb": "/static/images/products/B001MA0QY2.jpg",
+        "large": "/static/images/products/B001MA0QY2.jpg",
+        "fallback_svg": "/static/images/products/B001MA0QY2.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B001MA0QY2.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "L'Oreal Paris Revitalift 1.5% Pure Hyaluronic Acid Serum",
+    "average_rating": 4.6,
+    "rating_number": 1890,
+    "features": [
+      "1.5% Pure Hyaluronic Acid for deep plumping hydration",
+      "Visibly reduces wrinkles in 1 week",
+      "Lightweight gel serum absorbs quickly without sticky residue",
+      "Dermatologist tested, paraben-free, fragrance-free"
+    ],
+    "description": [
+      "Dermatologist-validated intensive hydrating serum for youthful radiance. Rapidly absorbs to deliver intense moisture and smooth skin texture."
+    ],
+    "price": 999.0,
+    "store": "L'Oreal Paris",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Facial Serums"
+    ],
+    "details": {
+      "Item Form": "Serum",
+      "Volume": "1.0 oz",
+      "Skin Concern": "Anti-Aging, Fine Lines"
+    },
+    "parent_asin": "B003V21W3I",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B003V21W3I.jpg",
+        "local_url": "/static/images/products/B003V21W3I.jpg",
+        "thumb": "/static/images/products/B003V21W3I.jpg",
+        "large": "/static/images/products/B003V21W3I.jpg",
+        "fallback_svg": "/static/images/products/B003V21W3I.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B003V21W3I.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Paula's Choice Skin Perfecting 2% BHA Liquid Exfoliant",
+    "average_rating": 4.6,
+    "rating_number": 4100,
+    "features": [
+      "2% Salicylic Acid (BHA) unclogs and diminishes enlarged pores",
+      "Sheds built-up layers of skin for radiant tone",
+      "Fluid texture absorbs quickly for daily exfoliation",
+      "Combats redness, wrinkles, aging, and blackheads"
+    ],
+    "description": [
+      "A leave-on exfoliant gentle enough for daily use on all skin types. Exfoliates dead skin cells while clearing pores for a smoother, clearer complexion."
+    ],
+    "price": 2700.0,
+    "store": "Paula's Choice",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Facial Exfoliants"
+    ],
+    "details": {
+      "Item Form": "Liquid Exfoliant",
+      "Key Ingredient": "Salicylic Acid 2%",
+      "Volume": "4 fl oz"
+    },
+    "parent_asin": "B004D248KC",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B004D248KC.jpg",
+        "local_url": "/static/images/products/B004D248KC.jpg",
+        "thumb": "/static/images/products/B004D248KC.jpg",
+        "large": "/static/images/products/B004D248KC.jpg",
+        "fallback_svg": "/static/images/products/B004D248KC.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B004D248KC.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "La Roche-Posay Anthelios Melt-in Milk Sunscreen SPF 60",
+    "average_rating": 4.7,
+    "rating_number": 1640,
+    "features": [
+      "Broad spectrum SPF 60 face and body protection",
+      "Cell-Ox Shield technology with antioxidants",
+      "Fast-absorbing milk texture leaves skin soft and hydrated",
+      "Water resistant up to 80 minutes"
+    ],
+    "description": [
+      "Award-winning sunscreen formulated with advanced UVA/UVB protection and antioxidants. Suitable for sensitive skin."
+    ],
+    "price": 1850.0,
+    "store": "La Roche-Posay",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Sunscreen"
+    ],
+    "details": {
+      "SPF": "60",
+      "Item Form": "Lotion",
+      "Sun Protection Factor": "60 SPF"
+    },
+    "parent_asin": "B00551GBWC",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B00551GBWC.jpg",
+        "local_url": "/static/images/products/B00551GBWC.jpg",
+        "thumb": "/static/images/products/B00551GBWC.jpg",
+        "large": "/static/images/products/B00551GBWC.jpg",
+        "fallback_svg": "/static/images/products/B00551GBWC.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B00551GBWC.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "NYX Professional Makeup Soft Matte Lip Cream - Abu Dhabi",
+    "average_rating": 4.4,
+    "rating_number": 980,
+    "features": [
+      "Creamy, lightweight matte finish",
+      "Delightfully sweet scented formula",
+      "Cruelty-free certified by PETA",
+      "Highly pigmented nude rose shade"
+    ],
+    "description": [
+      "Neither lipstick nor lip gloss, this matte lip cream is a new kind of lip color that goes on silky smooth and sets to a velvety matte finish."
+    ],
+    "price": 699.0,
+    "store": "NYX Professional Makeup",
+    "categories": [
+      "Beauty & Personal Care",
+      "Makeup",
+      "Lips",
+      "Lipstick"
+    ],
+    "details": {
+      "Shade": "Abu Dhabi (Nude Rose)",
+      "Finish": "Matte",
+      "Volume": "0.27 fl oz"
+    },
+    "parent_asin": "B007MT6J1E",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B007MT6J1E.jpg",
+        "local_url": "/static/images/products/B007MT6J1E.jpg",
+        "thumb": "/static/images/products/B007MT6J1E.jpg",
+        "large": "/static/images/products/B007MT6J1E.jpg",
+        "fallback_svg": "/static/images/products/B007MT6J1E.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B007MT6J1E.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Neutrogena Hydro Boost Water Gel Moisturizer with Hyaluronic Acid",
+    "average_rating": 4.6,
+    "rating_number": 2940,
+    "features": [
+      "Oil-free water gel formula absorbs instantly",
+      "Hyaluronic acid acts as a sponge for dry skin cells",
+      "Non-comedogenic (won't clog pores)",
+      "Provides 48 hours of continuous hydration"
+    ],
+    "description": [
+      "Quench your skin with Neutrogena Hydro Boost Water Gel. Formulated with hyaluronic acid, it delivers intense hydration to leave skin smooth and supple."
+    ],
+    "price": 950.0,
+    "store": "Neutrogena",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Face Moisturizers"
+    ],
+    "details": {
+      "Item Form": "Water Gel",
+      "Volume": "1.7 oz",
+      "Target Area": "Face & Neck"
+    },
+    "parent_asin": "B008630WNE",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B008630WNE.jpg",
+        "local_url": "/static/images/products/B008630WNE.jpg",
+        "thumb": "/static/images/products/B008630WNE.jpg",
+        "large": "/static/images/products/B008630WNE.jpg",
+        "fallback_svg": "/static/images/products/B008630WNE.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B008630WNE.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Olaplex No. 3 Hair Perfector Repairing Treatment",
+    "average_rating": 4.7,
+    "rating_number": 5120,
+    "features": [
+      "Patented bond building technology repairs broken hair bonds",
+      "Reduces breakage and visibly strengthens hair",
+      "Restores healthy appearance and texture",
+      "Suitable for all hair types (bleached, colored, natural)"
+    ],
+    "description": [
+      "An at-home bond builder treatment that reduces breakage and visibly strengthens hair, improving its look and feel."
+    ],
+    "price": 2950.0,
+    "store": "Olaplex",
+    "categories": [
+      "Beauty & Personal Care",
+      "Hair Care",
+      "Hair Treatments"
+    ],
+    "details": {
+      "Item Form": "Liquid Treatment",
+      "Volume": "3.3 fl oz",
+      "Hair Type": "All Hair Types"
+    },
+    "parent_asin": "B00B4UYN6S",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B00B4UYN6S.jpg",
+        "local_url": "/static/images/products/B00B4UYN6S.jpg",
+        "thumb": "/static/images/products/B00B4UYN6S.jpg",
+        "large": "/static/images/products/B00B4UYN6S.jpg",
+        "fallback_svg": "/static/images/products/B00B4UYN6S.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B00B4UYN6S.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "COSRX Advanced Snail 96 Mucin Power Essence",
+    "average_rating": 4.6,
+    "rating_number": 3780,
+    "features": [
+      "96.3% Snail Secretion Filtrate for deep hydration",
+      "Fades dark spots and improves skin elasticity",
+      "Lightweight mucin texture absorbs into skin quickly",
+      "100% Cruelty-free production"
+    ],
+    "description": [
+      "Formulated with 96.3% Snail Secretion Filtrate, this essence protects the skin from moisture loss while keeping the skin texture smooth and healthy."
+    ],
+    "price": 1250.0,
+    "store": "COSRX",
+    "categories": [
+      "Beauty & Personal Care",
+      "Skin Care",
+      "Facial Essences"
+    ],
+    "details": {
+      "Item Form": "Essence",
+      "Volume": "100 ml / 3.38 fl oz",
+      "Key Ingredient": "Snail Mucin"
+    },
+    "parent_asin": "B00E7Q299S",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B00E7Q299S.jpg",
+        "local_url": "/static/images/products/B00E7Q299S.jpg",
+        "thumb": "/static/images/products/B00E7Q299S.jpg",
+        "large": "/static/images/products/B00E7Q299S.jpg",
+        "fallback_svg": "/static/images/products/B00E7Q299S.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B00E7Q299S.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Rare Beauty Soft Pinch Liquid Blush - Joy",
+    "average_rating": 4.8,
+    "rating_number": 1420,
+    "features": [
+      "Weightless, long-lasting liquid blush formula",
+      "Blends and builds effortlessly for a soft, healthy flush",
+      "Infused with botanical blend of lotus, gardenia, and white water lily",
+      "Dermatologist tested and suitable for sensitive skin"
+    ],
+    "description": [
+      "A weightless, long-lasting liquid blush that blends and builds beautifully for a soft, healthy flush. Available in matte and dewy finishes."
+    ],
+    "price": 2300.0,
+    "store": "Rare Beauty",
+    "categories": [
+      "Beauty & Personal Care",
+      "Makeup",
+      "Face",
+      "Blush"
+    ],
+    "details": {
+      "Shade": "Joy (Dewy Peach)",
+      "Finish": "Dewy",
+      "Volume": "0.25 oz"
+    },
+    "parent_asin": "B01N2G7N1W",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B01N2G7N1W.jpg",
+        "local_url": "/static/images/products/B01N2G7N1W.jpg",
+        "thumb": "/static/images/products/B01N2G7N1W.jpg",
+        "large": "/static/images/products/B01N2G7N1W.jpg",
+        "fallback_svg": "/static/images/products/B01N2G7N1W.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B01N2G7N1W.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  },
+  {
+    "main_category": "All Beauty",
+    "title": "Sol de Janeiro Brazilian Bum Bum Cream Moisturizer",
+    "average_rating": 4.7,
+    "rating_number": 2890,
+    "features": [
+      "Fast-absorbing body cream with potent Guaran\u00e1 extract",
+      "Visibly tightens and smooths skin texture",
+      "Delicious Cheirosa 62 fragrance (Pistachio & Salted Caramel)",
+      "Rich in Cupua\u00e7u Butter, A\u00e7a\u00ed Oil, and Coconut Oil"
+    ],
+    "description": [
+      "An award-winning body cream that visibly tightens the look of skin while surrounding you with the addictive warm fragrance notes of salted caramel and pistachio."
+    ],
+    "price": 3600.0,
+    "store": "Sol de Janeiro",
+    "categories": [
+      "Beauty & Personal Care",
+      "Body Care",
+      "Body Creams"
+    ],
+    "details": {
+      "Item Form": "Cream",
+      "Volume": "240 ml / 8.1 fl oz",
+      "Fragrance": "Cheirosa 62"
+    },
+    "parent_asin": "B079F5S5W2",
+    "images": [
+      {
+        "real_photo": "/static/images/products/B079F5S5W2.jpg",
+        "local_url": "/static/images/products/B079F5S5W2.jpg",
+        "thumb": "/static/images/products/B079F5S5W2.jpg",
+        "large": "/static/images/products/B079F5S5W2.jpg",
+        "fallback_svg": "/static/images/products/B079F5S5W2.svg",
+        "remote_sample": "https://images-na.ssl-images-amazon.com/images/I/41sample_B079F5S5W2.jpg",
+        "variant": "MAIN"
+      }
+    ]
+  }
+]

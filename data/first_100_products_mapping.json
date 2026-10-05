@@ -1,0 +1,902 @@
+[
+  {
+    "key": "LG-40-19",
+    "sku": "LG-40-19",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Dive",
+    "category": "Lips",
+    "sanitized": "LG_40_19",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "LG-40-8",
+    "sku": "LG-40-8",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Coral Dream",
+    "category": "Lips",
+    "sanitized": "LG_40_8",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "L-24-A9",
+    "sku": "L-24-A9",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Pink Curve",
+    "category": "Lips",
+    "sanitized": "L_24_A9",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "LG-40-3",
+    "sku": "LG-40-3",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Divine Wine",
+    "category": "Lips",
+    "sanitized": "LG_40_3",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "LG-40-7",
+    "sku": "LG-40-7",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Satin Rose",
+    "category": "Lips",
+    "sanitized": "LG_40_7",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "LG-40-14",
+    "sku": "LG-40-14",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Sugar Plum",
+    "category": "Lips",
+    "sanitized": "LG_40_14",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "L-23-07",
+    "sku": "L-23-07",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Pink Show",
+    "category": "Lips",
+    "sanitized": "L_23_07",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "L-24-A16",
+    "sku": "L-24-A16",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Warm Nude",
+    "category": "Lips",
+    "sanitized": "L_24_A16",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "DH-127-337",
+    "sku": "DH-127-337",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Grey 337",
+    "category": "Nails",
+    "sanitized": "DH_127_337",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "EL-43",
+    "sku": "EL-43",
+    "product_name": "Stay All Day Eyeliner",
+    "variant_name": "Stay All Day Eyeliner",
+    "category": "Eyes",
+    "sanitized": "EL_43",
+    "sanitized_name": "Stay_All_Day_Eyeliner"
+  },
+  {
+    "key": "L-21-A2",
+    "sku": "L-21-A2",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Nude Coffee",
+    "category": "Lips",
+    "sanitized": "L_21_A2",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  },
+  {
+    "key": "L-23-23",
+    "sku": "L-23-23",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Celebrity Soon",
+    "category": "Lips",
+    "sanitized": "L_23_23",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "L-24-A25",
+    "sku": "L-24-A25",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Marry Berry",
+    "category": "Lips",
+    "sanitized": "L_24_A25",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "DH-127 Studio-971",
+    "sku": "DH-127 Studio-971",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Shimmer Purple 971",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_971",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "Eyepen",
+    "sku": "Eyepen",
+    "product_name": "Intense Penliner",
+    "variant_name": "Intense Penliner",
+    "category": "Eyes",
+    "sanitized": "Eyepen",
+    "sanitized_name": "Intense_Penliner"
+  },
+  {
+    "key": "DH-127-70",
+    "sku": "DH-127-70",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-White 70",
+    "category": "Nails",
+    "sanitized": "DH_127_70",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "DH-127 Studio-944",
+    "sku": "DH-127 Studio-944",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Green 944",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_944",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "L-24-A17",
+    "sku": "L-24-A17",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Magic Mauve",
+    "category": "Lips",
+    "sanitized": "L_24_A17",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "L-24-A28",
+    "sku": "L-24-A28",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Pink Mauve",
+    "category": "Lips",
+    "sanitized": "L_24_A28",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "LG-39-V24",
+    "sku": "LG-39-V24",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Deep Rust",
+    "category": "Lips",
+    "sanitized": "LG_39_V24",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "NWIPES-40-3",
+    "sku": "NWIPES-40-3",
+    "product_name": "Quick Nail Wipes - 40",
+    "variant_name": "Quick Nail Wipes - 40 - Red Rose",
+    "category": "Nails",
+    "sanitized": "NWIPES_40_3",
+    "sanitized_name": "Quick_Nail_Wipes_40"
+  },
+  {
+    "key": "NWIPES-40-1",
+    "sku": "NWIPES-40-1",
+    "product_name": "Quick Nail Wipes - 40",
+    "variant_name": "Quick Nail Wipes - 40 - Lavender",
+    "category": "Nails",
+    "sanitized": "NWIPES_40_1",
+    "sanitized_name": "Quick_Nail_Wipes_40"
+  },
+  {
+    "key": "CR-01-C5",
+    "sku": "CR-01-C5",
+    "product_name": "Blemish free concealor",
+    "variant_name": "Blemish free concealor - Natural",
+    "category": "Face",
+    "sanitized": "CR_01_C5",
+    "sanitized_name": "Blemish_free_concealor"
+  },
+  {
+    "key": "L-23-12",
+    "sku": "L-23-12",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Maple Map",
+    "category": "Lips",
+    "sanitized": "L_23_12",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "L-21-A16",
+    "sku": "L-21-A16",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Warm Nude",
+    "category": "Lips",
+    "sanitized": "L_21_A16",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  },
+  {
+    "key": "C-39-A4",
+    "sku": "C-39-A4",
+    "product_name": "Power Puff compact & concealer",
+    "variant_name": "Power Puff compact & concealer - Rich Walnut",
+    "category": "Face",
+    "sanitized": "C_39_A4",
+    "sanitized_name": "Power_Puff_compact_concealer"
+  },
+  {
+    "key": "Primer",
+    "sku": "Primer",
+    "product_name": "Prime It Up",
+    "variant_name": "Prime It Up",
+    "category": "Face",
+    "sanitized": "Primer",
+    "sanitized_name": "Prime_It_Up"
+  },
+  {
+    "key": "FD-22-6",
+    "sku": "FD-22-6",
+    "product_name": "Daily wear Concealor Foundation",
+    "variant_name": "Daily wear Concealor Foundation-Warm Beige",
+    "category": "Face",
+    "sanitized": "FD_22_6",
+    "sanitized_name": "Daily_wear_Concealor_Foundation"
+  },
+  {
+    "key": "DH-127 Studio-966",
+    "sku": "DH-127 Studio-966",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Micro Brown 966",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_966",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "MAS-07",
+    "sku": "MAS-07",
+    "product_name": "Voluminous Lash Mascara",
+    "variant_name": "Voluminous Lash Mascara",
+    "category": "Eyes",
+    "sanitized": "MAS_07",
+    "sanitized_name": "Voluminous_Lash_Mascara"
+  },
+  {
+    "key": "L-23-02",
+    "sku": "L-23-02",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Shocking Pink",
+    "category": "Lips",
+    "sanitized": "L_23_02",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "L-23-15",
+    "sku": "L-23-15",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Terrocotta",
+    "category": "Lips",
+    "sanitized": "L_23_15",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "L-23-05",
+    "sku": "L-23-05",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Rose Matter",
+    "category": "Lips",
+    "sanitized": "L_23_05",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "C-39-A5",
+    "sku": "C-39-A5",
+    "product_name": "Power Puff compact & concealer",
+    "variant_name": "Power Puff compact & concealer - Silk Warm",
+    "category": "Face",
+    "sanitized": "C_39_A5",
+    "sanitized_name": "Power_Puff_compact_concealer"
+  },
+  {
+    "key": "DH-127 Studio-970",
+    "sku": "DH-127 Studio-970",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Rose Gold 970",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_970",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "LG-40-22",
+    "sku": "LG-40-22",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Autum",
+    "category": "Lips",
+    "sanitized": "LG_40_22",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "LG-40-2",
+    "sku": "LG-40-2",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Red Alert",
+    "category": "Lips",
+    "sanitized": "LG_40_2",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "LG-39-V9",
+    "sku": "LG-39-V9",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Dark Chocolate",
+    "category": "Lips",
+    "sanitized": "LG_39_V9",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "LG-39-V22",
+    "sku": "LG-39-V22",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Burgundy Blend",
+    "category": "Lips",
+    "sanitized": "LG_39_V22",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "EL-233-3",
+    "sku": "EL-233-3",
+    "product_name": "Wing It Eyeliner",
+    "variant_name": "Wing It Eyeliner-Turquoise",
+    "category": "Eyes",
+    "sanitized": "EL_233_3",
+    "sanitized_name": "Wing_It_Eyeliner"
+  },
+  {
+    "key": "L-21-A22",
+    "sku": "L-21-A22",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Red Rust",
+    "category": "Lips",
+    "sanitized": "L_21_A22",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  },
+  {
+    "key": "EL-233-1",
+    "sku": "EL-233-1",
+    "product_name": "Wing It Eyeliner",
+    "variant_name": "Wing It Eyeliner-Electric Blue",
+    "category": "Eyes",
+    "sanitized": "EL_233_1",
+    "sanitized_name": "Wing_It_Eyeliner"
+  },
+  {
+    "key": "DH-127-2",
+    "sku": "DH-127-2",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Pink 2",
+    "category": "Nails",
+    "sanitized": "DH_127_2",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "DH-127-100",
+    "sku": "DH-127-100",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Red 100",
+    "category": "Nails",
+    "sanitized": "DH_127_100",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "Stay Matte FD-01",
+    "sku": "Stay Matte FD-01",
+    "product_name": "Stay Matte Foundation",
+    "variant_name": "Stay Matte Foundation - Golden Amber",
+    "category": "Face",
+    "sanitized": "Stay_Matte_FD_01",
+    "sanitized_name": "Stay_Matte_Foundation"
+  },
+  {
+    "key": "L-21-A7",
+    "sku": "L-21-A7",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Red Carpet",
+    "category": "Lips",
+    "sanitized": "L_21_A7",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  },
+  {
+    "key": "FD-28-03",
+    "sku": "FD-28-03",
+    "product_name": "Second Skin Drop foundation",
+    "variant_name": "Second Skin Drop foundation-Sun Beige",
+    "category": "Face",
+    "sanitized": "FD_28_03",
+    "sanitized_name": "Second_Skin_Drop_foundation"
+  },
+  {
+    "key": "Stay Matte FD-06",
+    "sku": "Stay Matte FD-06",
+    "product_name": "Stay Matte Foundation",
+    "variant_name": "Stay Matte Foundation - Soft Tan",
+    "category": "Face",
+    "sanitized": "Stay_Matte_FD_06",
+    "sanitized_name": "Stay_Matte_Foundation"
+  },
+  {
+    "key": "L-23-11",
+    "sku": "L-23-11",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Choco Break",
+    "category": "Lips",
+    "sanitized": "L_23_11",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "LG-40-6",
+    "sku": "LG-40-6",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Angel Red",
+    "category": "Lips",
+    "sanitized": "LG_40_6",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "EL-233-9",
+    "sku": "EL-233-9",
+    "product_name": "Wing It Eyeliner",
+    "variant_name": "Wing It Eyeliner-Bronze",
+    "category": "Eyes",
+    "sanitized": "EL_233_9",
+    "sanitized_name": "Wing_It_Eyeliner"
+  },
+  {
+    "key": "DH-127-8",
+    "sku": "DH-127-8",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Grey 8",
+    "category": "Nails",
+    "sanitized": "DH_127_8",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "CR-01-C2",
+    "sku": "CR-01-C2",
+    "product_name": "Blemish free concealor",
+    "variant_name": "Blemish free concealor - Radiance",
+    "category": "Face",
+    "sanitized": "CR_01_C2",
+    "sanitized_name": "Blemish_free_concealor"
+  },
+  {
+    "key": "FD-28-04",
+    "sku": "FD-28-04",
+    "product_name": "Second Skin Drop foundation",
+    "variant_name": "Second Skin Drop foundation-Warm Nude",
+    "category": "Face",
+    "sanitized": "FD_28_04",
+    "sanitized_name": "Second_Skin_Drop_foundation"
+  },
+  {
+    "key": "CR-01-C3",
+    "sku": "CR-01-C3",
+    "product_name": "Blemish free concealor",
+    "variant_name": "Blemish free concealor - Yellow Archie",
+    "category": "Face",
+    "sanitized": "CR_01_C3",
+    "sanitized_name": "Blemish_free_concealor"
+  },
+  {
+    "key": "Illuminator-4",
+    "sku": "Illuminator-4",
+    "product_name": "Liquid Illuminator",
+    "variant_name": "Liquid Illuminator-Copper Shine",
+    "category": "Face",
+    "sanitized": "Illuminator_4",
+    "sanitized_name": "Liquid_Illuminator"
+  },
+  {
+    "key": "L-23-18",
+    "sku": "L-23-18",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Lively Pink",
+    "category": "Lips",
+    "sanitized": "L_23_18",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "DH-127-4",
+    "sku": "DH-127-4",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Green 4",
+    "category": "Nails",
+    "sanitized": "DH_127_4",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "EL-233-10",
+    "sku": "EL-233-10",
+    "product_name": "Wing It Eyeliner",
+    "variant_name": "Wing It Eyeliner-Smokey",
+    "category": "Eyes",
+    "sanitized": "EL_233_10",
+    "sanitized_name": "Wing_It_Eyeliner"
+  },
+  {
+    "key": "DH-127-129",
+    "sku": "DH-127-129",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Gold 129",
+    "category": "Nails",
+    "sanitized": "DH_127_129",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "DIP-GO-3",
+    "sku": "DIP-GO-3",
+    "product_name": "DIP & Go",
+    "variant_name": "DIP & Go-Strawberry",
+    "category": "Nails",
+    "sanitized": "DIP_GO_3",
+    "sanitized_name": "DIP_Go"
+  },
+  {
+    "key": "C-33-2",
+    "sku": "C-33-2",
+    "product_name": "Skin Perfect Compact Powder",
+    "variant_name": "Skin Perfect Compact Powder-Medium Beige",
+    "category": "Face",
+    "sanitized": "C_33_2",
+    "sanitized_name": "Skin_Perfect_Compact_Powder"
+  },
+  {
+    "key": "CR-01-C6",
+    "sku": "CR-01-C6",
+    "product_name": "Blemish free concealor",
+    "variant_name": "Blemish free concealor - Siena Red",
+    "category": "Face",
+    "sanitized": "CR_01_C6",
+    "sanitized_name": "Blemish_free_concealor"
+  },
+  {
+    "key": "L-24-A2",
+    "sku": "L-24-A2",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Nude Coffee",
+    "category": "Lips",
+    "sanitized": "L_24_A2",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "L-21-A3",
+    "sku": "L-21-A3",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Cherry Wine",
+    "category": "Lips",
+    "sanitized": "L_21_A3",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  },
+  {
+    "key": "C-33-1",
+    "sku": "C-33-1",
+    "product_name": "Skin Perfect Compact Powder",
+    "variant_name": "Skin Perfect Compact Powder-Natural Beige",
+    "category": "Face",
+    "sanitized": "C_33_1",
+    "sanitized_name": "Skin_Perfect_Compact_Powder"
+  },
+  {
+    "key": "FD-28-01",
+    "sku": "FD-28-01",
+    "product_name": "Second Skin Drop foundation",
+    "variant_name": "Second Skin Drop foundation-Golden Honey",
+    "category": "Face",
+    "sanitized": "FD_28_01",
+    "sanitized_name": "Second_Skin_Drop_foundation"
+  },
+  {
+    "key": "DH-127-158",
+    "sku": "DH-127-158",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Black 158",
+    "category": "Nails",
+    "sanitized": "DH_127_158",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "L-23-21",
+    "sku": "L-23-21",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Sunshine",
+    "category": "Lips",
+    "sanitized": "L_23_21",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "FD-22-3",
+    "sku": "FD-22-3",
+    "product_name": "Daily wear Concealor Foundation",
+    "variant_name": "Daily wear Concealor Foundation-Creamy Beige",
+    "category": "Face",
+    "sanitized": "FD_22_3",
+    "sanitized_name": "Daily_wear_Concealor_Foundation"
+  },
+  {
+    "key": "LG-40-23",
+    "sku": "LG-40-23",
+    "product_name": "Mini Power Matte Lipcolour",
+    "variant_name": "Mini Power Matte Lipcolour-Glam",
+    "category": "Lips",
+    "sanitized": "LG_40_23",
+    "sanitized_name": "Mini_Power_Matte_Lipcolour"
+  },
+  {
+    "key": "C-39-A1",
+    "sku": "C-39-A1",
+    "product_name": "Power Puff compact & concealer",
+    "variant_name": "Power Puff compact & concealer - Creamy Beige",
+    "category": "Face",
+    "sanitized": "C_39_A1",
+    "sanitized_name": "Power_Puff_compact_concealer"
+  },
+  {
+    "key": "Illuminator-6",
+    "sku": "Illuminator-6",
+    "product_name": "Liquid Illuminator",
+    "variant_name": "Liquid Illuminator-Rose Gold",
+    "category": "Face",
+    "sanitized": "Illuminator_6",
+    "sanitized_name": "Liquid_Illuminator"
+  },
+  {
+    "key": "FD-28-02",
+    "sku": "FD-28-02",
+    "product_name": "Second Skin Drop foundation",
+    "variant_name": "Second Skin Drop foundation-Rose Beige",
+    "category": "Face",
+    "sanitized": "FD_28_02",
+    "sanitized_name": "Second_Skin_Drop_foundation"
+  },
+  {
+    "key": "Stay Matte FD-04",
+    "sku": "Stay Matte FD-04",
+    "product_name": "Stay Matte Foundation",
+    "variant_name": "Stay Matte Foundation - Nude Beige",
+    "category": "Face",
+    "sanitized": "Stay_Matte_FD_04",
+    "sanitized_name": "Stay_Matte_Foundation"
+  },
+  {
+    "key": "DH-127 Studio-961",
+    "sku": "DH-127 Studio-961",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Grey Silver 961",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_961",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "LG-39-V2",
+    "sku": "LG-39-V2",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Bling Pink",
+    "category": "Lips",
+    "sanitized": "LG_39_V2",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "CR-01-C1",
+    "sku": "CR-01-C1",
+    "product_name": "Blemish free concealor",
+    "variant_name": "Blemish free concealor - Fresh Ivory",
+    "category": "Face",
+    "sanitized": "CR_01_C1",
+    "sanitized_name": "Blemish_free_concealor"
+  },
+  {
+    "key": "LG-39-V6",
+    "sku": "LG-39-V6",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Maroon Wave",
+    "category": "Lips",
+    "sanitized": "LG_39_V6",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "FD-22-2",
+    "sku": "FD-22-2",
+    "product_name": "Daily wear Concealor Foundation",
+    "variant_name": "Daily wear Concealor Foundation-Soft Honey",
+    "category": "Face",
+    "sanitized": "FD_22_2",
+    "sanitized_name": "Daily_wear_Concealor_Foundation"
+  },
+  {
+    "key": "LG-39-V7",
+    "sku": "LG-39-V7",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Rose Dream",
+    "category": "Lips",
+    "sanitized": "LG_39_V7",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "C-33-4",
+    "sku": "C-33-4",
+    "product_name": "Skin Perfect Compact Powder",
+    "variant_name": "Skin Perfect Compact Powder-Beige",
+    "category": "Face",
+    "sanitized": "C_33_4",
+    "sanitized_name": "Skin_Perfect_Compact_Powder"
+  },
+  {
+    "key": "Illuminator-3",
+    "sku": "Illuminator-3",
+    "product_name": "Liquid Illuminator",
+    "variant_name": "Liquid Illuminator-Pink Glow",
+    "category": "Face",
+    "sanitized": "Illuminator_3",
+    "sanitized_name": "Liquid_Illuminator"
+  },
+  {
+    "key": "L-24-A27",
+    "sku": "L-24-A27",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Suite Up Pink",
+    "category": "Lips",
+    "sanitized": "L_24_A27",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "L-23-24",
+    "sku": "L-23-24",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Unicorn Blood",
+    "category": "Lips",
+    "sanitized": "L_23_24",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "DH-127-28",
+    "sku": "DH-127-28",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Blue 28",
+    "category": "Nails",
+    "sanitized": "DH_127_28",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "DH-127-333",
+    "sku": "DH-127-333",
+    "product_name": "5 Toxic Free Nail Lacquer",
+    "variant_name": "5 Toxic Free Nail Lacquer-Coral 333",
+    "category": "Nails",
+    "sanitized": "DH_127_333",
+    "sanitized_name": "5_Toxic_Free_Nail_Lacquer"
+  },
+  {
+    "key": "L-23-20",
+    "sku": "L-23-20",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Rose Luster",
+    "category": "Lips",
+    "sanitized": "L_23_20",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "LG-36-24",
+    "sku": "LG-36-24",
+    "product_name": "2 in 1 Matte + Gloss Lipcolour",
+    "variant_name": "2 in 1 Matte + Gloss Lipcolour - Mercy Maroon",
+    "category": "Lips",
+    "sanitized": "LG_36_24",
+    "sanitized_name": "2_in_1_Matte_Gloss_Lipcolour"
+  },
+  {
+    "key": "Stay Matte FD-05",
+    "sku": "Stay Matte FD-05",
+    "product_name": "Stay Matte Foundation",
+    "variant_name": "Stay Matte Foundation - Classic Ivory",
+    "category": "Face",
+    "sanitized": "Stay_Matte_FD_05",
+    "sanitized_name": "Stay_Matte_Foundation"
+  },
+  {
+    "key": "DH-127 Studio-963",
+    "sku": "DH-127 Studio-963",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Pink 963",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_963",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "L-24-A26",
+    "sku": "L-24-A26",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-Pink Me Red",
+    "category": "Lips",
+    "sanitized": "L_24_A26",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "DH-127 Studio-962",
+    "sku": "DH-127 Studio-962",
+    "product_name": "Studio Nail Polish",
+    "variant_name": "Studio Nail Polish-Gold 962",
+    "category": "Nails",
+    "sanitized": "DH_127_Studio_962",
+    "sanitized_name": "Studio_Nail_Polish"
+  },
+  {
+    "key": "L-23-04",
+    "sku": "L-23-04",
+    "product_name": "Colour Rich Lipstick",
+    "variant_name": "Colour Rich Lipstick-Never Nude",
+    "category": "Lips",
+    "sanitized": "L_23_04",
+    "sanitized_name": "Colour_Rich_Lipstick"
+  },
+  {
+    "key": "Illuminator-5",
+    "sku": "Illuminator-5",
+    "product_name": "Liquid Illuminator",
+    "variant_name": "Liquid Illuminator-Bronze",
+    "category": "Face",
+    "sanitized": "Illuminator_5",
+    "sanitized_name": "Liquid_Illuminator"
+  },
+  {
+    "key": "C-33-6",
+    "sku": "C-33-6",
+    "product_name": "Skin Perfect Compact Powder",
+    "variant_name": "Skin Perfect Compact Powder-Light Beige",
+    "category": "Face",
+    "sanitized": "C_33_6",
+    "sanitized_name": "Skin_Perfect_Compact_Powder"
+  },
+  {
+    "key": "LG-39-V18",
+    "sku": "LG-39-V18",
+    "product_name": "Power Matte Lipcolor",
+    "variant_name": "Power Matte Lipcolor-Red Velvet",
+    "category": "Lips",
+    "sanitized": "LG_39_V18",
+    "sanitized_name": "Power_Matte_Lipcolor"
+  },
+  {
+    "key": "Illuminator-1",
+    "sku": "Illuminator-1",
+    "product_name": "Liquid Illuminator",
+    "variant_name": "Liquid Illuminator-Gold",
+    "category": "Face",
+    "sanitized": "Illuminator_1",
+    "sanitized_name": "Liquid_Illuminator"
+  },
+  {
+    "key": "L-24-A12",
+    "sku": "L-24-A12",
+    "product_name": "Primer Matte Lipstick",
+    "variant_name": "Primer Matte Lipstick-High Heels",
+    "category": "Lips",
+    "sanitized": "L_24_A12",
+    "sanitized_name": "Primer_Matte_Lipstick"
+  },
+  {
+    "key": "L-21-A8",
+    "sku": "L-21-A8",
+    "product_name": "Always On Matte Lipstick",
+    "variant_name": "Always On Matte Lipstick-Berry Dance",
+    "category": "Lips",
+    "sanitized": "L_21_A8",
+    "sanitized_name": "Always_On_Matte_Lipstick"
+  }
+]

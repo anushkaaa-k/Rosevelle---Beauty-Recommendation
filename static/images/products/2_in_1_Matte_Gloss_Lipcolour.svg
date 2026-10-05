@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+      <defs>
+        <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF9F2" />
+          <stop offset="100%" stop-color="#F5EBDD" />
+        </radialGradient>
+      </defs>
+      <rect width="300" height="300" rx="16" fill="url(#bgGlow)" stroke="#B98283" stroke-width="2" />
+      <circle cx="150" cy="150" r="105" fill="none" stroke="#C5A46D" stroke-width="1.5" stroke-dasharray="4,4" />
+      
+        <rect x="120" y="95" width="60" height="135" rx="8" fill="#641E2B" />
+        <rect x="125" y="60" width="50" height="35" rx="4" fill="#C5A46D" />
+        <path d="M 130 60 L 170 60 L 150 25 Z" fill="#641E2B" />
+        <rect x="130" y="125" width="40" height="75" rx="3" fill="#FFF9F2" />
+        <text x="150" y="150" font-family="'Playfair Display', serif" font-size="9" font-weight="bold" fill="#641E2B" text-anchor="middle">ROSEVELLE</text>
+        <text x="150" y="170" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#352329" text-anchor="middle">2in1 Lipcolo</text>
+        
+    </svg>

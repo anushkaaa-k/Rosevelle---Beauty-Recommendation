@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROSEVELLE — Luxury Cosmetics Recommendation & Analytics</title>
+  <!-- Google Fonts: Playfair Display (Serif) & Plus Jakarta Sans (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Custom Luxury Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="app-header">
+    <div class="brand-logo">
+      <span>Rosevelle</span>
+    </div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="tab-explorer">Dataset Explorer</button>
+      <button class="nav-tab" data-tab="tab-recommender">Recommender Engine</button>
+      <button class="nav-tab" data-tab="tab-evaluation">Evaluation Metrics</button>
+      <button class="nav-tab" data-tab="tab-apriori">Apriori Basket</button>
+      <button class="nav-tab" data-tab="tab-rfm">RFM Clustering</button>
+      <button class="nav-tab" data-tab="tab-olap">Sales OLAP</button>
+      <button class="nav-tab" data-tab="tab-dt">Predictive Analytics</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- TAB 1: DATASET EXPLORER -->
+    <section id="tab-explorer" class="tab-content active">
+
+      <!-- Dataset Transparency Banner -->
+      <div class="disclaimer-banner">
+        <span style="font-size:1.2rem; color:var(--maroon-primary);">✨</span>
+        <div>
+          <strong>Data Transparency Panel:</strong> Powered 100% by the <strong>Real Cosmetics E-Commerce Dataset</strong> (~8,164 records, 2,012 customers, 2,217 orders, 32 catalog titles, 205 SKUs). Zero synthetic or fake records generated.
+        </div>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Cleaned Records</div>
+          <div id="stat-real-reviews" class="kpi-value">8,164</div>
+          <div class="kpi-sub">Verified transaction line items</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Unique Customers</div>
+          <div id="stat-real-users" class="kpi-value">2,012</div>
+          <div class="kpi-sub">Customer Code identifiers</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Unique Cosmetics Products</div>
+          <div id="stat-real-products" class="kpi-value">32</div>
+          <div class="kpi-sub">Catalog product titles</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Unique Order Baskets</div>
+          <div id="stat-real-orders" class="kpi-value">2,217</div>
+          <div class="kpi-sub">Unique checkout transaction IDs</div>
+        </div>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Total Gross Revenue</div>
+          <div id="stat-syn-revenue" class="kpi-value">₹9,86,695.00</div>
+          <div class="kpi-sub">Total gross sales revenue</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Avg Basket Value (AOV)</div>
+          <div id="stat-syn-aov" class="kpi-value">₹445.06</div>
+          <div class="kpi-sub">Per unique order transaction</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Date Range</div>
+          <div id="stat-date-range" class="kpi-value" style="font-size:1.15rem;">09-Aug-2020 to 26-Oct-2020</div>
+          <div class="kpi-sub">80 days of e-commerce data</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Data Quality Audit</div>
+          <div id="stat-quality" class="kpi-value" style="font-size:1.35rem; color:#2e7d32;">100% Cleaned</div>
+          <div class="kpi-sub">Imputed missing skin tones & categories</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Category Sales Distribution</span>
+          </div>
+          <canvas id="chart-rating-dist" height="200"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">
+            <span>Dataset Inspector Controls</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Active Dataset Source:</label>
+            <select id="explorer-dataset-select" class="form-select">
+              <option value="real_cosmetics_ecommerce" selected>[REAL] Cosmetics E-Commerce Transactions (~8,164 records)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Search Records:</label>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" id="explorer-search-input" class="form-control" placeholder="Search by Order ID, Customer Code, Product Name, Category, Zone...">
+              <button id="btn-reset-explorer-search" class="btn btn-secondary" style="padding:0.5rem 1rem; flex-shrink:0;">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>Dataset Record Browser</span>
+          <button class="btn btn-secondary" onclick="exportExplorerCSV()" style="padding:0.4rem 0.8rem; font-size:0.8rem;"> Export CSV</button>
+        </div>
+        <div id="explorer-table-container" class="table-responsive">
+          <div style="padding:2rem; text-align:center;">Loading dataset records...</div>
+        </div>
+        <div id="explorer-pagination" class="pagination-container"></div>
+      </div>
+    </section>
+
+    <!-- TAB 2: RECOMMENDER ENGINE -->
+    <section id="tab-recommender" class="tab-content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Recommender System Controls</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Active Customer (Customer Code):</label>
+            <select id="rec-user-select" class="form-select">
+              <option value="CUST-0001">CUST-0001 (High-Spender VIP Customer)</option>
+              <option value="CUST-0002">CUST-0002 (Frequent Repeat Shopper)</option>
+              <option value="CUST-0005">CUST-0005 (Regular Beauty Buyer)</option>
+              <option value="CUST-0010">CUST-0010 (Lipcare Enthusiast)</option>
+              <option value="CUST-0015">CUST-0015 (Face Makeup Enthusiast)</option>
+              <option value="CUST-0020">CUST-0020 (Nailcare Enthusiast)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Recommendation Algorithm:</label>
+            <select id="rec-algo-select" class="form-select">
+              <option value="hybrid">Hybrid Engine (SVD + Content TF-IDF)</option>
+              <option value="svd">Matrix Factorization (Truncated SVD)</option>
+              <option value="user_cf">User-Based Collaborative Filtering</option>
+              <option value="item_cf">Item-Based Collaborative Filtering</option>
+              <option value="content_tfidf">Content-Based Filtering (TF-IDF)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Top-K Recommendations Count:</label>
+            <select id="rec-topk-select" class="form-select">
+              <option value="3">Top 3 Items</option>
+              <option value="5" selected>Top 5 Items</option>
+              <option value="8">Top 8 Items</option>
+            </select>
+          </div>
+          <button id="btn-run-recommend" class="btn btn-primary" style="width:100%;">
+              Generate Personal Recommendations
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Recommended Beauty Products</span>
+          </div>
+          <div id="rec-results-container">
+            <div style="padding:2rem; text-align:center; color:var(--text-secondary);">Select options and click generate to view recommendations.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: EVALUATION METRICS -->
+    <section id="tab-evaluation" class="tab-content">
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">RMSE (Rating Error)</div>
+          <div id="metric-rmse" class="kpi-value">--</div>
+          <div class="kpi-sub">Root Mean Squared Error</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">MAE (Absolute Error)</div>
+          <div id="metric-mae" class="kpi-value">--</div>
+          <div class="kpi-sub">Mean Absolute Error</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Precision@5</div>
+          <div id="metric-precision" class="kpi-value">--</div>
+          <div class="kpi-sub">Top-5 relevant ratio</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">NDCG@5</div>
+          <div id="metric-ndcg" class="kpi-value">--</div>
+          <div class="kpi-sub">Normalized Discounted Cumulative Gain</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Comparative Model Benchmarks</span>
+          </div>
+          <canvas id="chart-algo-compare" height="180"></canvas>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Overall Model Diagnostics</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:0.5rem;">
+            <div style="background:var(--bg-main); padding:0.9rem; border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+              <div style="font-size:0.8rem; color:var(--text-secondary);">Recall@5 Score:</div>
+              <div id="metric-recall" style="font-family:var(--font-serif); font-size:1.35rem; font-weight:700; color:var(--maroon-primary);">--</div>
+            </div>
+            <div style="background:var(--bg-main); padding:0.9rem; border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+              <div style="font-size:0.8rem; color:var(--text-secondary);">MAP@5 Ranking Score:</div>
+              <div id="metric-map" style="font-family:var(--font-serif); font-size:1.35rem; font-weight:700; color:var(--maroon-primary);">--</div>
+            </div>
+            <div style="background:var(--bg-main); padding:0.9rem; border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+              <div style="font-size:0.8rem; color:var(--text-secondary);">Catalog Coverage:</div>
+              <div id="metric-coverage" style="font-family:var(--font-serif); font-size:1.35rem; font-weight:700; color:var(--maroon-primary);">--</div>
+            </div>
+            <div style="background:var(--bg-main); padding:0.9rem; border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+              <div style="font-size:0.8rem; color:var(--text-secondary);">Inter-List Diversity:</div>
+              <div id="metric-diversity" style="font-family:var(--font-serif); font-size:1.35rem; font-weight:700; color:var(--maroon-primary);">--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1.75rem;">
+        <div class="card-title">
+          <span>Evaluated Product Recommendations & Accuracy Table</span>
+          <button class="btn btn-secondary" onclick="exportEvalCSV()" style="padding:0.4rem 0.8rem; font-size:0.8rem;">Export CSV</button>
+        </div>
+        <div id="eval-products-table-container" class="table-responsive">
+          <div style="padding:2rem; text-align:center; color:var(--text-secondary);">Loading evaluated product results...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: APRIORI MARKET BASKET -->
+    <section id="tab-apriori" class="tab-content">
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title">
+          <span>Apriori Algorithm Settings</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: flex-end;">
+          <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+            <label class="form-label">Minimum Support (min_support):</label>
+            <input type="number" id="apriori-supp" class="form-control" value="0.04" step="0.01" min="0.01" max="0.5">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+            <label class="form-label">Minimum Confidence (min_confidence):</label>
+            <input type="number" id="apriori-conf" class="form-control" value="0.2" step="0.05" min="0.1" max="1.0">
+          </div>
+          <div style="flex: 0 0 auto;">
+            <button id="btn-run-apriori" class="btn btn-primary" style="padding: 0.65rem 1.8rem; margin-bottom:0;">
+                Mine Association Rules
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title">
+          <span>Association Rules Visualizations</span>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem;">
+          <div>
+            <canvas id="chart-apriori-lift" height="200"></canvas>
+          </div>
+          <div>
+            <canvas id="chart-apriori-metrics" height="200"></canvas>
+          </div>
+        </div>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--rose-accent);">
+          <canvas id="chart-apriori-scatter" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>Actionable Co-Purchase Rules</span>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary); margin-bottom:0;">Sort Rules:</label>
+            <select id="apriori-sort-select" class="form-select" style="padding:0.3rem 0.6rem; font-size:0.8rem; width:auto;">
+              <option value="lift" selected>Sort by Lift (Highest First)</option>
+              <option value="confidence">Sort by Confidence (Highest First)</option>
+              <option value="support">Sort by Support (Highest First)</option>
+            </select>
+            <button class="btn btn-secondary" onclick="exportAprioriCSV()" style="padding:0.4rem 0.8rem; font-size:0.8rem;"> Export CSV</button>
+          </div>
+        </div>
+        <div id="apriori-results-container">
+          <div style="padding:2rem; text-align:center; color:var(--text-secondary);">Click mine to execute Apriori.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: RFM CLUSTERING -->
+    <section id="tab-rfm" class="tab-content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>K-Means RFM Settings</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Clusters (K):</label>
+            <select id="rfm-k-select" class="form-select">
+              <option value="3">3 Customer Segments</option>
+              <option value="4" selected>4 Customer Segments</option>
+              <option value="5">5 Customer Segments</option>
+            </select>
+          </div>
+          <button id="btn-run-rfm" class="btn btn-primary" style="width:100%; margin-bottom:1rem;">
+              Run Customer Clustering
+          </button>
+          <div style="padding:1rem; background:var(--bg-secondary); border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+            <div style="font-size:0.85rem; color:var(--text-secondary)">Silhouette Quality Score:</div>
+            <div id="rfm-sil-score" style="font-size:1.6rem; font-family:var(--font-serif); font-weight:800; color:var(--maroon-primary);">--</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Customer Segment Profiles & Strategies</span>
+          </div>
+          <canvas id="chart-rfm-clusters" height="180"></canvas>
+          <div id="rfm-profiles-container" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: SALES OLAP & EXECUTIVE DASHBOARD -->
+    <section id="tab-olap" class="tab-content">
+      <!-- Executive Dashboard Summary KPIs -->
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Total Revenue</div>
+          <div id="olap-kpi-revenue" class="kpi-value">--</div>
+          <div class="kpi-sub">Filtered gross sales sum</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Total Orders Count</div>
+          <div id="olap-kpi-orders" class="kpi-value">--</div>
+          <div class="kpi-sub">Unique checkout baskets</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Average Order Value (AOV)</div>
+          <div id="olap-kpi-aov" class="kpi-value">--</div>
+          <div class="kpi-sub">Revenue / Order count</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Total Items Sold</div>
+          <div id="olap-kpi-items" class="kpi-value">--</div>
+          <div class="kpi-sub">Total product units</div>
+        </div>
+      </div>
+
+      <!-- Slice & Dice Multidimensional Filters -->
+      <div class="card" style="margin-bottom:1.75rem;">
+        <div class="card-title">
+          <span>Multidimensional Slice & Dice Controls</span>
+          <button id="btn-reset-olap-filters" class="btn btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;"> Reset Filters</button>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Geographical Zone (Slice):</label>
+            <select id="olap-channel-select" class="form-select">
+              <option value="ALL">ALL Zones</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Order Status (Dice):</label>
+            <select id="olap-quarter-select" class="form-select">
+              <option value="ALL">ALL Order Statuses</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Product Category Filter:</label>
+            <select id="olap-category-select" class="form-select">
+              <option value="ALL">ALL Categories</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Sales Revenue by Geographical Zone</span>
+          </div>
+          <canvas id="chart-olap-sales" height="200"></canvas>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Category Sales Share</span>
+          </div>
+          <canvas id="chart-olap-category" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Top Bestselling Products & Pivot Table Row -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Top Bestselling Cosmetics Products</span>
+          </div>
+          <div id="olap-top-products-container">
+            <div style="padding:1.5rem; text-align:center; color:var(--text-muted);">Loading top products...</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Zone vs Category Pivot Matrix</span>
+            <button class="btn btn-secondary" onclick="exportOlapCSV()" style="padding:0.4rem 0.8rem; font-size:0.8rem;"> Export CSV</button>
+          </div>
+          <div id="olap-pivot-container" class="table-responsive">
+            <div style="padding:1.5rem; text-align:center;">Loading OLAP Pivot...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: PREDICTIVE ANALYTICS — DECISION TREE -->
+    <section id="tab-dt" class="tab-content">
+      <div class="grid-4">
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Accuracy</div>
+          <div id="dt-stat-accuracy" class="kpi-value">--</div>
+          <div class="kpi-sub">Held-out test set accuracy</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Precision</div>
+          <div id="dt-stat-precision" class="kpi-value">--</div>
+          <div class="kpi-sub">Positive predictive value</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">Recall</div>
+          <div id="dt-stat-recall" class="kpi-value">--</div>
+          <div class="kpi-sub">Sensitivity / True positive rate</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.85rem; color:var(--text-secondary)">F1-Score</div>
+          <div id="dt-stat-f1" class="kpi-value">--</div>
+          <div class="kpi-sub">Harmonic mean of P & R</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span>Customer Purchase Behavior Classifier</span>
+          </div>
+          <form id="dt-predict-form" onsubmit="handleDtPredict(event)">
+            <div class="form-group">
+              <label class="form-label">Recency (Days since last purchase):</label>
+              <input type="number" id="dt-recency" class="form-control" value="14" min="1" max="365" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Frequency (Total orders count):</label>
+              <input type="number" id="dt-frequency" class="form-control" value="2" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Monetary Spend (₹ Total lifetime spend):</label>
+              <input type="number" id="dt-monetary" class="form-control" value="850" min="1" max="100000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Avg Basket Size (Items per order):</label>
+              <input type="number" id="dt-avg-basket" class="form-control" value="3.0" step="0.1" min="1" max="50" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                Classify Customer Behavior
+            </button>
+          </form>
+
+          <div id="dt-prediction-result" style="margin-top:1.25rem; display:none;">
+            <div style="background:var(--bg-main); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--gold-accent);">
+              <div style="font-size:0.85rem; color:var(--text-secondary)">Predicted Customer Tier:</div>
+              <div id="dt-predicted-label" style="font-family:var(--font-serif); font-size:1.5rem; font-weight:700; color:var(--maroon-primary); margin:0.25rem 0;">--</div>
+              <div id="dt-confidence-score" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.75rem;">--</div>
+              
+              <div style="font-weight:600; font-size:0.85rem; color:var(--maroon-primary); margin-bottom:0.35rem;">Decision Explanation Path:</div>
+              <div id="dt-decision-path-list" style="font-size:0.8rem; line-height:1.4; background:var(--surface); padding:0.75rem; border-radius:4px; border:1px solid var(--rose-accent);">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <span>Feature Importance & Decision Rules</span>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <canvas id="chart-dt-features" height="180"></canvas>
+          </div>
+          <div class="card-title" style="font-size:0.95rem; margin-top:1rem;">
+            <span>Interactive Decision Tree Visual Diagram</span>
+          </div>
+          <div id="dt-tree-visualization-container" style="width:100%; padding:1rem 0.25rem; background:var(--bg-main); border-radius:var(--radius-sm); border:1px solid var(--rose-accent);">
+            <div style="text-align:center; padding:1.5rem; color:var(--text-muted);">Rendering visual decision tree...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JS Modules -->
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

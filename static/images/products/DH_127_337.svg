@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+      <defs>
+        <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF9F2" />
+          <stop offset="100%" stop-color="#F5EBDD" />
+        </radialGradient>
+      </defs>
+      <rect width="300" height="300" rx="16" fill="url(#bgGlow)" stroke="#B98283" stroke-width="2" />
+      <circle cx="150" cy="150" r="105" fill="none" stroke="#C5A46D" stroke-width="1.5" stroke-dasharray="4,4" />
+      
+        <rect x="110" y="120" width="80" height="100" rx="12" fill="#B98283" />
+        <rect x="130" y="55" width="40" height="65" rx="5" fill="#C5A46D" />
+        <rect x="120" y="140" width="60" height="60" rx="4" fill="#FFF9F2" />
+        <text x="150" y="165" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#B98283" text-anchor="middle">ROSEVELLE</text>
+        <text x="150" y="185" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#352329" text-anchor="middle">Nail Lacquer</text>
+        
+    </svg>
