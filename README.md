@@ -164,14 +164,4 @@ beauty_recommender/
 
 ---
 
-## 🎓 DAA & Viva Q&A Guide
 
-1. **Why keep real reviews and synthetic transactions distinct?**  
-   *Answer*: Amazon review records represent individual user ratings given post-purchase without basket checkout information. Generating association rules on individual reviews would produce false co-purchase insights. Therefore, real reviews are used for recommendations, while synthetic transaction baskets are used for Apriori market basket analysis.
-
-2. **How does Matrix Factorization SVD work?**  
-   *Answer*: Truncated SVD factorizes the user-item rating matrix $R \approx U \Sigma V^T$ to discover latent feature dimensions, overcoming sparsity issues in recommendation systems.
-
-3. **How is NDCG@K calculated?**  
-   *Answer*: NDCG@K normalizes DCG@K by the Ideal DCG@K, discounting hits at lower recommendation ranks using a logarithmic decay function:
-   $$\text{DCG}@K = \sum_{i=1}^K \frac{r_i}{\log_2(i+1)}$$
