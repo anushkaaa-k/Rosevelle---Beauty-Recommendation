@@ -122,8 +122,14 @@ h1, h2, h3, h4, .brand-logo, .card-title, th {
   overflow-x: auto;
   white-space: nowrap;
   max-width: 100%;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  min-width: 0;
+  flex: 1 1 auto;
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.mode-switch-container {
+  flex-shrink: 0;
 }
 
 .nav-tabs::-webkit-scrollbar {
@@ -591,3 +597,70 @@ h1, h2, h3, h4, .brand-logo, .card-title, th {
   text-align: center;
   padding: 1rem;
 }
+
+/* Product Catalogue Grid & Card Sizing Rules */
+.product-grid, #live-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-items: start;
+  margin-bottom: 1.75rem;
+}
+
+.product-card {
+  height: auto !important;
+  min-height: 0 !important;
+  width: auto;
+  min-width: 0;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+.product-card .product-image {
+  height: 180px;
+  min-height: 180px;
+  flex: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rose-light);
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.product-card .product-body {
+  height: auto;
+  flex: none;
+}
+
+.product-card .product-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rose-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: none;
+}
+
+@media (max-width: 1099px) and (min-width: 700px) {
+  .product-grid, #live-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 699px) {
+  .product-grid, #live-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

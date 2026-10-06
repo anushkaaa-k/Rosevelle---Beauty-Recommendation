@@ -260,16 +260,25 @@ const Charts = {
     this.renderCategorySales(catId, categoryData);
   },
 
+  clearAprioriCharts(liftContainerId, metricsContainerId, scatterContainerId) {
+    if (aprioriLiftChart) { aprioriLiftChart.destroy(); aprioriLiftChart = null; }
+    if (aprioriMetricsChart) { aprioriMetricsChart.destroy(); aprioriMetricsChart = null; }
+    if (aprioriScatterChart) { aprioriScatterChart.destroy(); aprioriScatterChart = null; }
+  },
+
   renderAprioriCharts(liftContainerId, metricsContainerId, rules) {
     const ctxLift = document.getElementById(liftContainerId);
     const ctxMetrics = document.getElementById(metricsContainerId);
-    if (!rules || rules.length === 0) return;
+    if (!rules || rules.length === 0) {
+      this.clearAprioriCharts(liftContainerId, metricsContainerId, null);
+      return;
+    }
 
     const topRules = rules.slice(0, 7);
     const labels = topRules.map(r => {
-      const a = (r.antecedent_name || r.antecedent_asin).split(' ')[0];
-      const c = (r.consequent_name || r.consequent_asin).split(' ')[0];
-      return `${a} ➔ ${c}`;
+      const anteVal = String(r.antecedent_name || r.antecedent_asin || (Array.isArray(r.antecedents) ? r.antecedents.join(', ') : r.antecedents) || 'Item A');
+      const consVal = String(r.consequent_name || r.consequent_asin || (Array.isArray(r.consequents) ? r.consequents.join(', ') : r.consequents) || 'Item B');
+      return `${anteVal.split(' ')[0]} ➔ ${consVal.split(' ')[0]}`;
     });
 
     if (ctxLift) {
@@ -344,12 +353,16 @@ const Charts = {
 
     if (aprioriScatterChart) aprioriScatterChart.destroy();
 
-    const scatterData = rules.map(r => ({
-      x: Number((r.support * 100).toFixed(2)),
-      y: Number((r.confidence * 100).toFixed(2)),
-      lift: r.lift,
-      rule: `${(r.antecedent_name || r.antecedent_asin).split(' ')[0]} ➔ ${(r.consequent_name || r.consequent_asin).split(' ')[0]}`
-    }));
+    const scatterData = rules.map(r => {
+      const anteVal = String(r.antecedent_name || r.antecedent_asin || (Array.isArray(r.antecedents) ? r.antecedents.join(', ') : r.antecedents) || 'Item A');
+      const consVal = String(r.consequent_name || r.consequent_asin || (Array.isArray(r.consequents) ? r.consequents.join(', ') : r.consequents) || 'Item B');
+      return {
+        x: Number((r.support * 100).toFixed(2)),
+        y: Number((r.confidence * 100).toFixed(2)),
+        lift: r.lift,
+        rule: `${anteVal.split(' ')[0]} ➔ ${consVal.split(' ')[0]}`
+      };
+    });
 
     aprioriScatterChart = new Chart(ctx, {
       type: 'scatter',
@@ -447,129 +460,180 @@ const Charts = {
       return;
     }
 
+    // 1. Calculate node depths and maxDepth
     let maxDepth = 0;
-    function calculateDepth(node, depth = 0) {
+    function annotateDepth(node, depth = 0) {
       if (!node) return;
+      node.depth = depth;
       if (depth > maxDepth) maxDepth = depth;
       if (!node.is_leaf) {
-        if (node.left) calculateDepth(node.left, depth + 1);
-        if (node.right) calculateDepth(node.right, depth + 1);
+        if (node.left) annotateDepth(node.left, depth + 1);
+        if (node.right) annotateDepth(node.right, depth + 1);
       }
     }
-    calculateDepth(rootNode, 0);
+    annotateDepth(rootNode, 0);
 
-    const nodeW = 165;
-    const nodeH = 58;
-    const levelHeight = 110;
-    const startY = 38;
-    const width = 680;
-    const height = startY + (maxDepth * levelHeight) + (nodeH / 2) + 20;
+    // Layout configuration constants
+    const nodeW = 220;         // Node bounding box width (px)
+    const nodeH = 82;          // Node bounding box height (px)
+    const minGapX = 70;        // Minimum horizontal gap between node bounding boxes (px)
+    const levelHeight = 135;   // Vertical distance between level centers (px)
+    const paddingX = 60;       // Horizontal padding on SVG canvas (px)
+    const paddingY = 45;       // Vertical padding on SVG canvas (px)
 
+    // 2. Assign horizontal (x) and vertical (y) positions bottom-up using leaf indexing
+    let leafCounter = 0;
+    function assignNodeCoordinates(node) {
+      if (!node) return;
+      if (node.is_leaf) {
+        node.x = paddingX + leafCounter * (nodeW + minGapX) + nodeW / 2;
+        leafCounter++;
+      } else {
+        if (node.left) assignNodeCoordinates(node.left);
+        if (node.right) assignNodeCoordinates(node.right);
+
+        if (node.left && node.right) {
+          node.x = (node.left.x + node.right.x) / 2;
+        } else if (node.left) {
+          node.x = node.left.x + (nodeW + minGapX) / 2;
+        } else if (node.right) {
+          node.x = node.right.x - (nodeW + minGapX) / 2;
+        }
+      }
+      node.y = paddingY + node.depth * levelHeight + nodeH / 2;
+    }
+    assignNodeCoordinates(rootNode);
+
+    // 3. Traverse tree to collect all nodes and directed edges
     const nodeMap = [];
     const edgeList = [];
 
-    function assignCoordinates(node, depth, leftBound, rightBound) {
+    function collectNodesAndEdges(node) {
       if (!node) return;
-      const x = (leftBound + rightBound) / 2;
-      const y = startY + depth * levelHeight;
-      node.x = x;
-      node.y = y;
       nodeMap.push(node);
-
       if (!node.is_leaf) {
         if (node.left) {
-          assignCoordinates(node.left, depth + 1, leftBound, x);
+          let condText = node.feature === 'monetary'
+            ? `≤ ₹${Number(node.threshold).toLocaleString('en-IN')}`
+            : `≤ ${node.threshold}`;
           edgeList.push({
             from: node,
             to: node.left,
-            label: node.feature === 'monetary' ? `≤ ₹${Number(node.threshold).toLocaleString('en-IN')}` : `≤ ${node.threshold}`,
+            label: condText,
             branchType: 'Yes'
           });
+          collectNodesAndEdges(node.left);
         }
         if (node.right) {
-          assignCoordinates(node.right, depth + 1, x, rightBound);
+          let condText = node.feature === 'monetary'
+            ? `> ₹${Number(node.threshold).toLocaleString('en-IN')}`
+            : `> ${node.threshold}`;
           edgeList.push({
             from: node,
             to: node.right,
-            label: node.feature === 'monetary' ? `> ₹${Number(node.threshold).toLocaleString('en-IN')}` : `> ${node.threshold}`,
+            label: condText,
             branchType: 'No'
           });
+          collectNodesAndEdges(node.right);
         }
       }
     }
+    collectNodesAndEdges(rootNode);
 
-    assignCoordinates(rootNode, 0, 30, width - 30);
+    // Calculate canvas size
+    const contentWidth = paddingX * 2 + (leafCounter > 0 ? leafCounter : 1) * (nodeW + minGapX);
+    const containerWidth = container.clientWidth || 800;
+    const canvasWidth = Math.max(contentWidth, containerWidth);
+    const canvasHeight = paddingY * 2 + maxDepth * levelHeight + nodeH + 30;
 
     let svgHtml = `
-      <div style="width:100%; display:flex; justify-content:center; align-items:center; overflow:hidden;">
-        <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" style="font-family:'Plus Jakarta Sans', sans-serif; display:block; max-width:100%;">
+      <div style="width:100%; overflow-x:auto; overflow-y:auto; padding:0.5rem 0.25rem;">
+        <svg width="${canvasWidth}" height="${canvasHeight}" viewBox="0 0 ${canvasWidth} ${canvasHeight}" style="font-family:'Plus Jakarta Sans', sans-serif; display:block; margin:0 auto;">
           <defs>
             <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
-              <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#352329" flood-opacity="0.12" />
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#352329" flood-opacity="0.14" />
             </filter>
-            <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#B98283" />
+            <filter id="shadow-subtle" x="-10%" y="-10%" width="130%" height="130%">
+              <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#352329" flood-opacity="0.10" />
+            </filter>
+            <marker id="arrow-Yes" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32" />
+            </marker>
+            <marker id="arrow-No" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#c62828" />
             </marker>
           </defs>
     `;
 
+    // Render Edges & Labels FIRST (behind nodes)
     edgeList.forEach(edge => {
       const x1 = edge.from.x;
       const y1 = edge.from.y + nodeH / 2;
       const x2 = edge.to.x;
       const y2 = edge.to.y - nodeH / 2;
-      const cy1 = (y1 + y2) / 2;
-      const cy2 = (y1 + y2) / 2;
+
+      const cy1 = y1 + (y2 - y1) * 0.45;
+      const cy2 = y1 + (y2 - y1) * 0.55;
 
       const pathD = `M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}`;
       const midX = (x1 + x2) / 2;
       const midY = (y1 + y2) / 2;
 
-      const labelColor = edge.branchType === 'Yes' ? '#2e7d32' : '#c62828';
-      const labelBg = edge.branchType === 'Yes' ? '#e8f5e9' : '#ffebee';
+      const isYes = edge.branchType === 'Yes';
+      const labelColor = isYes ? '#1b5e20' : '#b71c1c';
+      const labelBg = isYes ? '#e8f5e9' : '#ffebee';
+      const labelBorder = isYes ? '#81c784' : '#e57373';
+
+      const badgeText = `${edge.branchType}: ${edge.label}`;
+      const badgeW = Math.max(90, badgeText.length * 6.5 + 16);
 
       svgHtml += `
-        <path d="${pathD}" stroke="#B98283" stroke-width="2" fill="none" marker-end="url(#arrow)" />
-        <g transform="translate(${midX}, ${midY})">
-          <rect x="-46" y="-10" width="92" height="20" rx="10" fill="${labelBg}" stroke="${labelColor}" stroke-width="1" />
-          <text x="0" y="3.5" text-anchor="middle" font-size="9.5px" font-weight="700" fill="${labelColor}">${edge.branchType}: ${edge.label}</text>
+        <g class="dt-edge-group">
+          <path d="${pathD}" stroke="#B98283" stroke-width="2.5" fill="none" marker-end="url(#arrow-${edge.branchType})" />
+          <g transform="translate(${midX}, ${midY})">
+            <rect x="${-badgeW/2}" y="-11" width="${badgeW}" height="22" rx="11" fill="${labelBg}" stroke="${labelBorder}" stroke-width="1.2" filter="url(#shadow-subtle)" />
+            <text x="0" y="4" text-anchor="middle" font-size="10px" font-weight="700" fill="${labelColor}">${badgeText}</text>
+          </g>
         </g>
       `;
     });
 
+    // Render Nodes SECOND (in front of edges)
     nodeMap.forEach(node => {
       const rx = node.x - nodeW / 2;
       const ry = node.y - nodeH / 2;
 
       if (node.is_leaf) {
-        const isVip = node.prediction.includes("VIP");
+        const isVip = (node.prediction || "").toLowerCase().includes("vip") || node.class_index === 1;
         const headerBg = isVip ? '#641E2B' : '#4E1721';
-        const cardBg = isVip ? '#FFF9F2' : '#F5EBDD';
+        const cardBg = isVip ? '#FFF9F2' : '#FDFBF7';
         const borderColor = isVip ? '#C5A46D' : '#B98283';
-        const titleText = isVip ? '⭐ VIP High Spender' : '🛍️ Standard Shopper';
+        const titleText = isVip ? '⭐ VIP / Target Customer' : '🛍️ Standard Shopper';
 
         svgHtml += `
           <g class="dt-node-group" style="cursor:pointer;">
-            <rect x="${rx}" y="${ry}" width="${nodeW}" height="${nodeH}" rx="8" fill="${cardBg}" stroke="${borderColor}" stroke-width="2" filter="url(#shadow)" />
-            <rect x="${rx}" y="${ry}" width="${nodeW}" height="20" rx="8" fill="${headerBg}" />
-            <rect x="${rx}" y="${ry+14}" width="${nodeW}" height="6" fill="${headerBg}" />
-            <text x="${node.x}" y="${ry + 14}" text-anchor="middle" font-size="10px" font-weight="700" fill="#FFF9F2">${titleText}</text>
-            <text x="${node.x}" y="${ry + 35}" text-anchor="middle" font-size="9.5px" font-weight="600" fill="#352329">Samples: ${node.samples} | Gini: ${node.impurity}</text>
-            <text x="${node.x}" y="${ry + 48}" text-anchor="middle" font-size="9px" font-weight="600" fill="#641E2B">Class Ratio: [${node.value.join(', ')}]</text>
+            <rect x="${rx}" y="${ry}" width="${nodeW}" height="${nodeH}" rx="10" fill="${cardBg}" stroke="${borderColor}" stroke-width="2" filter="url(#shadow)" />
+            <path d="M ${rx} ${ry+10} Q ${rx} ${ry} ${rx+10} ${ry} L ${rx+nodeW-10} ${ry} Q ${rx+nodeW} ${ry} ${rx+nodeW} ${ry+10} L ${rx+nodeW} ${ry+24} L ${rx} ${ry+24} Z" fill="${headerBg}" />
+            <text x="${node.x}" y="${ry + 16}" text-anchor="middle" font-size="11px" font-weight="700" fill="#FFF9F2">${titleText}</text>
+            <text x="${node.x}" y="${ry + 41}" text-anchor="middle" font-size="10.5px" font-weight="700" fill="#641E2B">Leaf: ${node.prediction}</text>
+            <text x="${node.x}" y="${ry + 58}" text-anchor="middle" font-size="9.5px" font-weight="600" fill="#352329">Samples: ${node.samples}  |  Gini: ${node.impurity}</text>
+            <text x="${node.x}" y="${ry + 73}" text-anchor="middle" font-size="9px" font-weight="600" fill="#8C2D40">Class Ratio: [${(node.value || []).join(', ')}]</text>
           </g>
         `;
       } else {
-        const condLabel = (node.feature_label || node.feature).split(' ')[0] + ' Rule';
-        const splitText = node.feature === 'monetary' ? `Spend ≤ ₹${Number(node.threshold).toLocaleString('en-IN')}` : `${node.feature_label} ≤ ${node.threshold}`;
+        const condLabel = (node.feature_label || node.feature || 'Rule').split(' ')[0] + ' Rule';
+        let splitText = node.feature === 'monetary'
+          ? `Spend ≤ ₹${Number(node.threshold).toLocaleString('en-IN')}`
+          : `${node.feature_label || node.feature} ≤ ${node.threshold}`;
 
         svgHtml += `
           <g class="dt-node-group" style="cursor:pointer;">
-            <rect x="${rx}" y="${ry}" width="${nodeW}" height="${nodeH}" rx="8" fill="#FFF9F2" stroke="#641E2B" stroke-width="2" filter="url(#shadow)" />
-            <rect x="${rx}" y="${ry}" width="${nodeW}" height="20" rx="8" fill="#641E2B" />
-            <rect x="${rx}" y="${ry+14}" width="${nodeW}" height="6" fill="#641E2B" />
-            <text x="${node.x}" y="${ry + 14}" text-anchor="middle" font-size="10px" font-weight="700" fill="#C5A46D">Split: ${condLabel}</text>
-            <text x="${node.x}" y="${ry + 35}" text-anchor="middle" font-size="10px" font-weight="700" fill="#641E2B">${splitText}</text>
-            <text x="${node.x}" y="${ry + 48}" text-anchor="middle" font-size="9px" font-weight="500" fill="#352329">Samples: ${node.samples} | Gini: ${node.impurity}</text>
+            <rect x="${rx}" y="${ry}" width="${nodeW}" height="${nodeH}" rx="10" fill="#FFF9F2" stroke="#641E2B" stroke-width="2" filter="url(#shadow)" />
+            <path d="M ${rx} ${ry+10} Q ${rx} ${ry} ${rx+10} ${ry} L ${rx+nodeW-10} ${ry} Q ${rx+nodeW} ${ry} ${rx+nodeW} ${ry+10} L ${rx+nodeW} ${ry+24} L ${rx} ${ry+24} Z" fill="#641E2B" />
+            <text x="${node.x}" y="${ry + 16}" text-anchor="middle" font-size="11px" font-weight="700" fill="#C5A46D">Split: ${condLabel}</text>
+            <text x="${node.x}" y="${ry + 41}" text-anchor="middle" font-size="10.5px" font-weight="700" fill="#641E2B">Condition: ${splitText}</text>
+            <text x="${node.x}" y="${ry + 58}" text-anchor="middle" font-size="9.5px" font-weight="600" fill="#352329">Samples: ${node.samples}  |  Gini: ${node.impurity}</text>
+            <text x="${node.x}" y="${ry + 73}" text-anchor="middle" font-size="9px" font-weight="500" fill="#8C2D40">Subtree Samples: ${node.samples}</text>
           </g>
         `;
       }

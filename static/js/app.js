@@ -6,6 +6,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("[*] Initializing ROSEVELLE Luxury Cosmetics Analytics SPA...");
   initNavigation();
+  initModeSwitcher();
+  loadLiveStatus();
   loadDatasetExplorer();
   loadRecommendations();
   loadEvaluationMetrics();
@@ -13,6 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
   loadRfmClusters();
   loadSalesOlap();
   loadDecisionTree();
+  loadLiveProducts();
+
+  // Attach Live Products UI listeners
+  const btnFetchLive = document.getElementById('btn-fetch-live-products');
+  const brandSelect = document.getElementById('live-brand-select');
+  const catSelect = document.getElementById('live-category-select');
+  const limitSelect = document.getElementById('live-limit-select');
+
+  if (btnFetchLive) btnFetchLive.addEventListener('click', loadLiveProducts);
+  if (brandSelect) brandSelect.addEventListener('change', loadLiveProducts);
+  if (catSelect) catSelect.addEventListener('change', loadLiveProducts);
+  if (limitSelect) limitSelect.addEventListener('change', loadLiveProducts);
 });
 
 /* Navigation & Tabs */
@@ -35,9 +49,169 @@ function initNavigation() {
 
 /* Helper formatting & image functions */
 function formatINR(val) {
-  if (val == null || isNaN(val)) return '₹0.00';
+  if (val == null || isNaN(val)) return window.currentDataSource === 'live' ? '$0.00' : '₹0.00';
   const num = Number(val);
-  return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (window.currentDataSource === 'live') {
+    return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  } else {
+    return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+}
+
+/* Dual Mode Switcher & Live Status Controls */
+function initModeSwitcher() {
+  const btnLive = document.getElementById('btn-mode-live');
+  const btnLocal = document.getElementById('btn-mode-local');
+  const btnRefresh = document.getElementById('btn-refresh-live-data');
+
+  if (btnLive) {
+    btnLive.addEventListener('click', () => {
+      if (window.currentDataSource === 'live') return;
+      window.currentDataSource = 'live';
+      updateModeButtonsUI();
+      updateCustomerDropdownOptions();
+      reloadAllAnalytics();
+    });
+  }
+
+  if (btnLocal) {
+    btnLocal.addEventListener('click', () => {
+      if (window.currentDataSource === 'local') return;
+      window.currentDataSource = 'local';
+      updateModeButtonsUI();
+      updateCustomerDropdownOptions();
+      reloadAllAnalytics();
+    });
+  }
+
+  if (btnRefresh) {
+    btnRefresh.addEventListener('click', handleRefreshLiveData);
+  }
+
+  updateModeButtonsUI();
+  updateCustomerDropdownOptions();
+}
+
+function updateModeButtonsUI() {
+  const btnLive = document.getElementById('btn-mode-live');
+  const btnLocal = document.getElementById('btn-mode-local');
+  if (!btnLive || !btnLocal) return;
+
+  if (window.currentDataSource === 'live') {
+    btnLive.style.background = 'var(--maroon-primary)';
+    btnLive.style.color = 'var(--text-ivory)';
+    btnLive.classList.add('active');
+
+    btnLocal.style.background = 'transparent';
+    btnLocal.style.color = 'var(--text-secondary)';
+    btnLocal.classList.remove('active');
+  } else {
+    btnLocal.style.background = 'var(--maroon-primary)';
+    btnLocal.style.color = 'var(--text-ivory)';
+    btnLocal.classList.add('active');
+
+    btnLive.style.background = 'transparent';
+    btnLive.style.color = 'var(--text-secondary)';
+    btnLive.classList.remove('active');
+  }
+}
+
+function updateCustomerDropdownOptions() {
+  const recSelect = document.getElementById('rec-user-select');
+  if (!recSelect) return;
+
+  recSelect.innerHTML = `
+    <option value="CUST-10" selected>CUST-10</option>
+    <option value="CUST-50">CUST-50</option>
+    <option value="CUST-100">CUST-100</option>
+    <option value="cust_code-16">cust_code-16</option>
+    <option value="cust_code-19">cust_code-19</option>
+    <option value="cust_code-22">cust_code-22</option>
+    <option value="cust_code-25">cust_code-25</option>
+  `;
+}
+
+async function handleRefreshLiveData() {
+  const btnRefresh = document.getElementById('btn-refresh-live-data');
+  if (btnRefresh) {
+    btnRefresh.disabled = true;
+    btnRefresh.innerHTML = `⏳ Refreshing Live Cosmetics...`;
+  }
+
+  try {
+    const res = await API.postLiveRefresh();
+    if (res.status === 'success') {
+      const fetchedTime = res.fetched_at ? new Date(res.fetched_at).toLocaleTimeString() : 'Just now';
+      alert(`✅ Live cosmetics catalogue refreshed successfully from Makeup API!\nFetched ${res.total_products_available || 0} items at ${fetchedTime}`);
+      await loadLiveStatus();
+      await loadLiveProducts();
+    } else {
+      alert(`⚠️ Failed to refresh live cosmetics API: ${res.message}`);
+      await loadLiveStatus();
+    }
+  } catch (err) {
+    alert(`⚠️ Refresh request failed: ${err.message}`);
+  } finally {
+    if (btnRefresh) {
+      btnRefresh.disabled = false;
+      btnRefresh.innerHTML = `🔄 Refresh Live Cosmetics`;
+    }
+  }
+}
+
+async function reloadAllAnalytics() {
+  console.log(`[*] Reloading all analytics tabs for active source: [${window.currentDataSource}]`);
+  await loadLiveStatus();
+  await loadDatasetExplorer();
+  await loadRecommendations();
+  await loadEvaluationMetrics();
+  await loadAprioriRules();
+  await loadRfmClusters();
+  await loadSalesOlap();
+  await loadDecisionTree();
+}
+
+async function loadLiveStatus() {
+  const badgeEl = document.getElementById('live-connection-badge');
+  const titleEl = document.getElementById('live-source-title');
+  const labelEl = document.getElementById('live-mode-label');
+  const countsEl = document.getElementById('live-counts-summary');
+  const timeEl = document.getElementById('live-fetched-time');
+
+  try {
+    const statusData = await API.getLiveStatus();
+    if (statusData.status === 'success') {
+      if (badgeEl) {
+        badgeEl.textContent = '● LIVE COSMETICS API CONNECTED';
+        badgeEl.style.background = '#2e7d32';
+      }
+      if (titleEl) {
+        titleEl.innerHTML = '<strong>LIVE PRODUCT SOURCE:</strong> Makeup API &nbsp;|&nbsp; <strong>ANALYTICS SOURCE:</strong> Real Cosmetics E-Commerce Transaction Dataset';
+      }
+      if (labelEl) {
+        labelEl.textContent = 'Live API provides fresh cosmetics product catalogue. Historical transaction data powers customer & DWM analytics.';
+      }
+      if (countsEl) {
+        const cnt = statusData.total_products_available || statusData.total_fetched || 0;
+        countsEl.innerHTML = `<span><strong>LIVE PRODUCT CATALOGUE:</strong> ${cnt} Real Cosmetics Products (Makeup API)</span>`;
+      }
+      if (timeEl) {
+        const tStr = statusData.fetched_at ? new Date(statusData.fetched_at).toLocaleTimeString() : 'Just now';
+        timeEl.textContent = `Last Updated: ${tStr}`;
+      }
+    } else {
+      if (badgeEl) {
+        badgeEl.textContent = '● LIVE COSMETICS API UNAVAILABLE';
+        badgeEl.style.background = '#c62828';
+      }
+      if (titleEl) titleEl.textContent = 'LIVE PRODUCT SOURCE: Makeup API (Unavailable)';
+      if (labelEl) labelEl.textContent = statusData.message || 'API connection error';
+      if (countsEl) countsEl.innerHTML = `<span>API Connection Offline</span>`;
+      if (timeEl) timeEl.textContent = 'Offline';
+    }
+  } catch (err) {
+    console.error("[LiveStatus] Error fetching status:", err);
+  }
 }
 
 function getNormalizedImageUrl(row, fallbackName) {
@@ -122,8 +296,9 @@ function renderExplorerOverview(summary) {
   if (document.getElementById('stat-syn-revenue')) document.getElementById('stat-syn-revenue').textContent = formatINR(real.total_revenue);
   if (document.getElementById('stat-syn-aov')) document.getElementById('stat-syn-aov').textContent = formatINR(real.avg_basket_value);
 
-  if (real.categories_distribution) {
-    Charts.renderRatingDistribution('chart-rating-dist', real.categories_distribution);
+  const catDist = real.categories_distribution || real.categories;
+  if (catDist) {
+    Charts.renderRatingDistribution('chart-rating-dist', catDist);
   }
 
   const selector = document.getElementById('explorer-dataset-select');
@@ -395,8 +570,22 @@ async function loadAprioriRules() {
 
 function renderAprioriResults(data) {
   const container = document.getElementById('apriori-results-container');
-  if (!data.association_rules || data.association_rules.length === 0) {
-    if (container) container.innerHTML = `<div style="padding:2rem; text-align:center; color:var(--maroon-primary); font-weight:600;">No association rules found for the current thresholds (min_support=${data.parameters?.min_support}, min_confidence=${data.parameters?.min_confidence}). Try adjusting values.</div>`;
+  const rules = data.association_rules || [];
+
+  if (!rules || rules.length === 0) {
+    if (container) {
+      container.innerHTML = `
+        <div style="padding:2.2rem; text-align:center; background:var(--bg-card); border:1px solid var(--rose-accent); border-radius:var(--radius-md);">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">🔍</div>
+          <h3 style="color:var(--maroon-primary); font-family:var(--font-serif); margin-bottom:0.4rem;">No Association Rules Found</h3>
+          <p style="color:var(--text-secondary); max-width:550px; margin:0 auto 0.8rem auto; font-size:0.88rem;">
+            No co-purchase rules satisfied the selected thresholds (min_support = ${((data.parameters?.min_support || 0.04) * 100).toFixed(1)}%, min_confidence = ${((data.parameters?.min_confidence || 0.2) * 100).toFixed(1)}%).
+          </p>
+          <div style="font-size:0.82rem; color:var(--text-muted);">Rules evaluated: <strong>0</strong>. Try lowering Minimum Support or Minimum Confidence thresholds using the control panel above.</div>
+        </div>
+      `;
+    }
+    Charts.clearAprioriCharts('chart-apriori-lift', 'chart-apriori-metrics', 'chart-apriori-scatter');
     return;
   }
 
@@ -708,3 +897,143 @@ window.handleDtPredict = async function(event) {
     alert("Failed to predict customer behavior: " + err.message);
   }
 };
+
+
+/* =====================================================================
+   8. LIVE BEAUTY CATALOGUE (EXTERNAL REST API)
+   ===================================================================== */
+async function loadLiveProducts() {
+  console.log("[*] Fetching Live Beauty Products from External REST API Proxy...");
+  const gridContainer = document.getElementById('live-products-grid');
+  const counterEl = document.getElementById('live-products-counter');
+  const brandSel = document.getElementById('live-brand-select');
+  const catSel = document.getElementById('live-category-select');
+  const limitSel = document.getElementById('live-limit-select');
+
+  const brand = brandSel ? brandSel.value : 'all';
+  const category = catSel ? catSel.value : 'all';
+  const limit = limitSel ? parseInt(limitSel.value) : 24;
+
+  if (gridContainer) {
+    gridContainer.innerHTML = renderLiveProductsLoadingSkeleton(limit > 8 ? 8 : limit);
+  }
+  if (counterEl) {
+    counterEl.innerHTML = `<span style="color:var(--text-muted);">Fetching dynamic catalogue via Flask proxy...</span>`;
+  }
+
+  try {
+    const res = await API.getLiveProducts(brand, category, limit);
+
+    if (res.status === 'success' && Array.isArray(res.products)) {
+      if (counterEl) {
+        counterEl.innerHTML = `<span style="color:#2e7d32;">✓ Loaded ${res.total_fetched} live products from ${res.data_source}</span>`;
+      }
+      renderLiveProductsGrid(res.products, gridContainer);
+    } else {
+      const errMsg = res.message || "Failed to load external beauty products";
+      if (counterEl) {
+        counterEl.innerHTML = `<span style="color:var(--maroon-primary);">⚠️ External API Error</span>`;
+      }
+      renderLiveProductsError(errMsg, gridContainer);
+    }
+  } catch (err) {
+    console.error("[Live API] Request failed:", err);
+    if (counterEl) {
+      counterEl.innerHTML = `<span style="color:var(--maroon-primary);">⚠️ Connection Error</span>`;
+    }
+    renderLiveProductsError(`Unable to connect to server proxy: ${err.message}`, gridContainer);
+  }
+}
+
+function renderLiveProductsLoadingSkeleton(count = 8) {
+  let cards = '';
+  for (let i = 0; i < count; i++) {
+    cards += `
+      <div class="card product-card" style="opacity:0.7; animation: pulse 1.5s infinite ease-in-out;">
+        <div class="product-image" style="background:var(--bg-main);"></div>
+        <div class="product-body">
+          <div style="height:16px; width:40%; background:var(--rose-light); border-radius:4px; margin-bottom:0.5rem;"></div>
+          <div style="height:20px; width:80%; background:var(--bg-main); border-radius:4px; margin-bottom:0.5rem;"></div>
+          <div style="height:16px; width:60%; background:var(--bg-main); border-radius:4px;"></div>
+        </div>
+      </div>
+    `;
+  }
+  return cards;
+}
+
+function renderLiveProductsError(message, container) {
+  if (!container) return;
+  container.innerHTML = `
+    <div class="card" style="grid-column: 1 / -1; text-align:center; padding:2.5rem 1.5rem; background:var(--bg-card); border:1px solid var(--rose-accent);">
+      <div style="font-size:2.5rem; margin-bottom:0.5rem;">⚠️</div>
+      <h3 style="color:var(--maroon-primary); margin-bottom:0.5rem; font-family:var(--font-serif);">External Beauty REST API Notice</h3>
+      <p style="color:var(--text-secondary); max-width:600px; margin:0 auto 1.25rem auto; font-size:0.9rem; line-height:1.5;">
+        ${message}
+      </p>
+      <button class="btn btn-primary" onclick="loadLiveProducts()" style="padding:0.6rem 1.5rem;">
+        🔄 Retry Connection
+      </button>
+    </div>
+  `;
+}
+
+function renderLiveProductsGrid(products, container) {
+  if (!container) return;
+
+  if (!products || products.length === 0) {
+    container.innerHTML = `
+      <div class="card" style="grid-column: 1 / -1; text-align:center; padding:2.5rem; color:var(--text-muted);">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">💄</div>
+        <h3>No Products Found</h3>
+        <p style="font-size:0.9rem; margin-top:0.25rem;">Try adjusting the Brand or Category filter settings.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = products.map(p => {
+    const imgHtml = p.image_url
+      ? `<img src="${p.image_url}" alt="${p.name.replace(/"/g, '&quot;')}" loading="lazy" style="max-height:100%; max-width:100%; object-fit:contain;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300&q=80';" />`
+      : `<div style="font-size:2.5rem;">💄</div>`;
+
+    const ratingHtml = p.rating
+      ? `<span style="color:#e67e22; font-weight:600; font-size:0.8rem;">★ ${p.rating}</span>`
+      : `<span style="color:var(--text-muted); font-size:0.75rem;">Not rated</span>`;
+
+    const descSnippet = p.description
+      ? `<p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.4rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.description}</p>`
+      : '';
+
+    return `
+      <div class="card product-card" style="transition:transform 0.2s ease, box-shadow 0.2s ease;">
+        <div class="product-image">
+          ${imgHtml}
+        </div>
+        <div class="product-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; flex-wrap:wrap; gap:0.25rem;">
+            <span class="badge badge-real" style="font-size:0.7rem; font-weight:600;">${p.brand}</span>
+            <span class="badge badge-synthetic" style="font-size:0.7rem;">${p.category}</span>
+          </div>
+          <h4 style="font-size:0.95rem; font-family:var(--font-serif); color:var(--maroon-primary); line-height:1.3; margin-bottom:0.3rem;">
+            ${p.name}
+          </h4>
+          ${descSnippet}
+        </div>
+        <div class="product-footer">
+          <div>
+            <div style="font-size:0.95rem; font-weight:700; color:var(--maroon-primary); font-family:var(--font-serif);">
+              ${p.price_formatted}
+            </div>
+            <div>${ratingHtml}</div>
+          </div>
+          ${p.product_link ? `
+            <a href="${p.product_link}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding:0.35rem 0.65rem; font-size:0.75rem; text-decoration:none;">
+              View Details ↗
+            </a>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}

@@ -20,6 +20,17 @@
     <div class="brand-logo">
       <span>Rosevelle</span>
     </div>
+
+    <!-- Dual Mode Switcher -->
+    <div class="mode-switch-container" style="display:flex; align-items:center; background:var(--bg-main); border:1px solid var(--rose-accent); border-radius:30px; padding:3px; flex-shrink:0;">
+      <button id="btn-mode-local" class="mode-switch-btn active" style="padding:0.35rem 0.85rem; font-size:0.78rem; border-radius:20px; font-weight:600; cursor:pointer; border:none; background:var(--maroon-primary); color:var(--text-ivory); transition:all 0.2s ease;">
+        💾 LOCAL DATASET
+      </button>
+      <button id="btn-mode-live" class="mode-switch-btn" style="padding:0.35rem 0.85rem; font-size:0.78rem; border-radius:20px; font-weight:600; cursor:pointer; border:none; background:transparent; color:var(--text-secondary); transition:all 0.2s ease;">
+        🌐 LIVE API DATA
+      </button>
+    </div>
+
     <nav class="nav-tabs">
       <button class="nav-tab active" data-tab="tab-explorer">Dataset Explorer</button>
       <button class="nav-tab" data-tab="tab-recommender">Recommender Engine</button>
@@ -28,10 +39,37 @@
       <button class="nav-tab" data-tab="tab-rfm">RFM Clustering</button>
       <button class="nav-tab" data-tab="tab-olap">Sales OLAP</button>
       <button class="nav-tab" data-tab="tab-dt">Predictive Analytics</button>
+      <button class="nav-tab" data-tab="tab-live-api">Live Catalogue</button>
     </nav>
   </header>
 
   <main class="container">
+
+    <!-- Global Data Status Bar -->
+    <div id="global-live-status-bar" style="margin-bottom:1.5rem; padding:0.85rem 1.25rem; background:var(--bg-card); border:1px solid var(--rose-accent); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; box-shadow:var(--shadow-subtle);">
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <span id="live-connection-badge" class="badge" style="background:var(--maroon-primary); color:#ffffff; font-size:0.75rem; padding:0.3rem 0.6rem; font-weight:600; letter-spacing:0.02em;">
+          ● LOCAL DATASET ACTIVE
+        </span>
+        <div style="font-size:0.85rem; color:var(--text-primary);">
+          <strong id="live-source-title" style="color:var(--maroon-primary); font-family:var(--font-serif);">Data Source: Real Cosmetics E-Commerce Dataset</strong>
+          <span style="color:var(--text-muted); margin:0 0.3rem;">|</span>
+          <span id="live-mode-label" style="font-style:italic; color:var(--text-secondary);">Offline Transaction Dataset (~8,164 records)</span>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+        <div id="live-counts-summary" style="font-size:0.78rem; color:var(--text-secondary); background:var(--bg-main); padding:0.35rem 0.75rem; border-radius:var(--radius-sm); border:1px solid var(--rose-light);">
+          <span>32 Catalog Titles • 205 SKUs • 2,012 Customers • 2,217 Orders • 8,164 Line Items</span>
+        </div>
+        <div id="live-fetched-time" style="font-size:0.75rem; color:var(--text-muted);">
+          Offline CSV
+        </div>
+        <button id="btn-refresh-live-data" class="btn btn-primary" style="display:none; padding:0.4rem 0.9rem; font-size:0.78rem; align-items:center; gap:0.4rem;">
+          🔄 Refresh Live Data
+        </button>
+      </div>
+    </div>
 
     <!-- TAB 1: DATASET EXPLORER -->
     <section id="tab-explorer" class="tab-content active">
@@ -517,6 +555,91 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- TAB 8: LIVE COSMETICS CATALOGUE (MAKEUP API) -->
+    <section id="tab-live-api" class="tab-content">
+
+      <!-- Data Source Transparency Banner -->
+      <div class="disclaimer-banner">
+        <span style="font-size:1.2rem; color:var(--maroon-primary);">🌐</span>
+        <div>
+          <strong>LIVE PRODUCT SOURCE: Makeup API</strong> — <em>Dynamically fetched cosmetics catalogue (`https://makeup-api.herokuapp.com/api/v1/products.json`)</em>.<br>
+          <span style="font-size:0.82rem; color:var(--text-secondary);">
+            <strong>ANALYTICS DATA SOURCE: Real Cosmetics E-Commerce Transaction Dataset</strong> — Historical transaction data (~8,164 records) powers Dataset Explorer, Recommendations, Evaluation Metrics, Apriori, RFM, Sales OLAP & Predictive Analytics.
+          </span>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Card -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title">
+          <span>Live Cosmetics Search & Filters</span>
+          <span id="live-api-key-badge" class="badge badge-real" style="font-size:0.75rem;">Makeup API Proxy Active</span>
+        </div>
+        <div class="grid-4" style="margin-top:0.75rem;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Brand Filter:</label>
+            <select id="live-brand-select" class="form-select">
+              <option value="all" selected>All Brands</option>
+              <option value="maybelline">Maybelline</option>
+              <option value="l'oreal">L'Oreal</option>
+              <option value="covergirl">Covergirl</option>
+              <option value="nyx">NYX</option>
+              <option value="revlon">Revlon</option>
+              <option value="clinique">Clinique</option>
+              <option value="e.l.f.">e.l.f.</option>
+              <option value="smashbox">Smashbox</option>
+              <option value="urban decay">Urban Decay</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Product Category:</label>
+            <select id="live-category-select" class="form-select">
+              <option value="all" selected>All Categories</option>
+              <option value="lipstick">Lipstick</option>
+              <option value="foundation">Foundation</option>
+              <option value="blush">Blush</option>
+              <option value="mascara">Mascara</option>
+              <option value="eyeliner">Eyeliner</option>
+              <option value="eyeshadow">Eyeshadow</option>
+              <option value="eyebrow">Eyebrow</option>
+              <option value="bronzer">Bronzer</option>
+              <option value="nail_polish">Nail Polish</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Product Limit:</label>
+            <select id="live-limit-select" class="form-select">
+              <option value="12">12 Products</option>
+              <option value="24" selected>24 Products</option>
+              <option value="36">36 Products</option>
+              <option value="48">48 Products</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0; display:flex; align-items:flex-end;">
+            <button id="btn-fetch-live-products" class="btn btn-primary" style="width:100%; padding:0.6rem 1rem;">
+              🔄 Refresh Live Cosmetics
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live API Status Bar -->
+      <div id="live-api-status-bar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; padding:0.5rem 1rem; background:var(--bg-card); border:1px solid var(--rose-light); border-radius:var(--radius-sm); font-size:0.85rem; color:var(--text-secondary);">
+        <div>
+          <span style="font-weight:600; color:var(--maroon-primary);">Data Source:</span> Makeup API (`https://makeup-api.herokuapp.com/api/v1/products.json`)
+        </div>
+        <div id="live-products-counter" style="font-weight:600; color:var(--maroon-primary);">
+          Ready to fetch live cosmetics...
+        </div>
+      </div>
+
+      <!-- Live Product Cards Grid -->
+      <div id="live-products-grid" class="product-grid">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+
     </section>
 
   </main>
